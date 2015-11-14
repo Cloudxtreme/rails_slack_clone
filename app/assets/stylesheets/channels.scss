@@ -1,11 +1,20 @@
 // Place all the styles related to the channels controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+$sidebar-width: 20%;
+$right-area-width: 100% - $sidebar-width;
+
+
+$sidebar-background-color: #4D3948;
+
+$title-color: #fff;
+$sidebar-color: #ab9ba9;
+
 .text-input {
   position: fixed;
   bottom: 2px;
   margin-bottom: 10px;
-  width: 100%;
+  width: $right-area-width;
 }
 
 #area-chat {
@@ -15,4 +24,27 @@
 
 .chat-row {
   margin-right: 10px;
+}
+
+.message {
+  padding-left: 40px;
+}
+
+.title {
+  color: $title-color;
+}
+
+.left-sidebar {
+  position: absolute;
+  width: $sidebar-width;
+  height: 100%;
+  background-color: $sidebar-background-color;
+  color: $sidebar-color;
+}
+
+.right-area {
+  position: absolute;
+  left: $sidebar-width;
+  width: $right-area-width;
+  height: 100%;
 }

@@ -18,7 +18,9 @@ class Message < ActiveRecord::Base
     {
       id: self.id,
       content: self.content,
-      user_email: self.user.email
+      user_email: self.user.email,
+      username: self.user.username,
+      avatar_url: self.user.avatar_url
     }
   end
 end

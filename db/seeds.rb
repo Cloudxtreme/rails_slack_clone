@@ -13,8 +13,10 @@ def create_chat_room name, description
   chat_room
 end
 
-def create_user email, password
+def create_user username, avatar_url, email, password
   user = User.new
+  user.username = username
+  user.avatar_url = avatar_url
   user.email = email
   user.password = password
   user.save
@@ -42,8 +44,8 @@ lobby = create_chat_room "Lobby", "Canal para chatear con el lobby del hotel"
 restaurant = create_chat_room "Restaurant", "Canal para chatear con el restaurant del hotel"
 loundry = create_chat_room "Lavanderia", "Canal para chatear con el servicio del hotel"
 
-romer = create_user "romerramos@gmail.com", "18020036"
-mariana = create_user "marianalegonia@gmail.com", "19565758"
+romer = create_user "romerramos", Faker::Avatar.image("rr", "36x36"), "romerramos@gmail.com", "18020036"
+mariana = create_user "marianalegonia", Faker::Avatar.image("ml", "36x36"), "marianalegonia@gmail.com", "19565758"
 
 create_chat_room_user lobby, romer
 create_chat_room_user lobby, mariana

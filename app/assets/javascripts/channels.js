@@ -3,9 +3,7 @@ $(document).ready(function(){
   var $text;
   var $refresh;
 
-  var currentUserEmail;
   var currentUserId;
-
   var chatRoomId;
 
   $area = $("#area-chat");
@@ -13,21 +11,30 @@ $(document).ready(function(){
   $messages = $(".messages");
   $refresh = $("#refresh");
 
-
-  currentUserEmail = $("#current-user").data("email");
   currentUserId = $("#current-user").data("id");
 
   chatRoomId = $("#current-channel").data("id");
 
-  function createWell(content, username, id) {
+  function createWell(content, username, id, avatar_url) {
     var $boldUsername;
-    var $well;
+    var $chatRow;
+    var $messages;
+    var $avatar;
+    var $message;
 
     $boldUsername = $("<b/>").html(username + " ");
-    $well = $("<div/>").addClass("well").attr("data-id", id);
+    $chatRow = $("<div/>").addClass("chat-row");
+    $avatar = $("<img/>").attr("src", avatar_url);
+    $messages = $("<div/>").addClass("messages").attr("data-id", id);
+    $message = $("<div/>").addClass("message");
 
-    $boldUsername.appendTo($well);
-    return $well.append(content);
+    $avatar.appendTo($messages);
+    $boldUsername.appendTo($messages);
+    $message.append(content).appendTo($messages);
+    $messages.appendTo($chatRow);
+
+
+    return $chatRow;
   }
 
   function clearText() {
@@ -56,8 +63,9 @@ $(document).ready(function(){
           auxQuery = "[data-id='"+message.id+"']";
 
           if($(auxQuery).length == 0) {
-            $well = createWell(message.content, message.user_email, message.id);
+            $well = createWell(message.content, message.username, message.id, message.avatar_url);
             $well.appendTo($area);
+            $.playSound('http://soundbible.com/mp3/Pop Cork-SoundBible.com-151671390');
             scrollDown();
           }
         }
@@ -77,7 +85,7 @@ $(document).ready(function(){
       success: function(data){
         console.log("Message posted!");
 
-        $well = createWell(data.content, data.user_email, data.id);
+        $well = createWell(data.content, data.username, data.id, data.avatar_url);
         $well.appendTo($area);
         scrollDown();
       }
@@ -94,19 +102,21 @@ $(document).ready(function(){
     }, 2000);
   }
 
-  $("#send-chat").click(function(){
+  $text.keyup(function(event){
     var content;
 
-    content = $text.val();
-
-    sendMessage(content, chatRoomId, currentUserId);
-
-    clearText();
+    if(event.keyCode == 13){
+      content = $text.val();
+      if(content.trim() != "") {
+        sendMessage(content, chatRoomId, currentUserId);
+        clearText();
+      }
+    }
   });
 
   window.setInterval(function(){
     refresh();
-  }, 3000);
+  }, 500);
 
   scrollDown();
 });

@@ -1,26 +1,24 @@
-.container
-  .row
-    .col-md-12
-      %h1#current-channel{"data-id" => @channel.id}
-        = @channel.name
-  .row
-    .col-md-4
-      %ul
-      - @channel_users.each do |channel_user|
-        %li
-          - if channel_user.user.email == current_user.email
-            %div#current-user{"data-email" => current_user.email, "data-id" => current_user.id}
-          = channel_user.user.email
-    .col-md-8#area-chat
-      - @channel.messages.each do |message|
-        .row.well.chat-row
-          .col-md-10.messages{"data-id" => message.id}
-            %b
-              = "#{message.user.email} "
+.left-sidebar
+  %h1.title#current-channel{"data-id" => @channel.id}
+    = @channel.name
+  %ul
+  - @channel_users.each do |channel_user|
+    %li
+      - if channel_user.user.email == current_user.email
+        %div#current-user{"data-username" => current_user.username, "data-email" => current_user.email, "data-id" => current_user.id}
+      = channel_user.user.username
+.right-area
+  .chat-header
+    %h2
+      Chat Header!
+  #area-chat
+    - @channel.messages.each do |message|
+      .chat-row
+        .messages{"data-id" => message.id}
+          %img{src: message.user.avatar_url}
+          %b
+            = "#{message.user.username} "
+          .message
             = message.content
-          - if message.user.id == current_user.id
-            .col-md-2.text-center
-              %input.form-control{type:"button", class:"btn btn-danger", value:"x", "data-id" => message.id}
-.text-input
-  %input.form-control#text-chat{type:"text"}
-  %input.form-control#send-chat{type:"button", class:"btn btn-primary bnt-block", value:"Send!"}
+  .text-input
+    %input.form-control#text-chat{type:"text"}
