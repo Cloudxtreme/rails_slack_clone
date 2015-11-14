@@ -1,0 +1,18 @@
+// Place all the styles related to the channels controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.text-input {
+  position: fixed;
+  bottom: 2px;
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+#area-chat {
+  height: 450px;
+  overflow: overlay;
+}
+
+.chat-row {
+  margin-right: 10px;
+}

@@ -1,0 +1,5 @@
+%h1
+  List of Channels
+- @channels.each do |channel|
+  .well
+    = link_to channel.name, channel_path(channel)
