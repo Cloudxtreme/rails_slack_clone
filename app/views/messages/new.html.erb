@@ -1,2 +1,8 @@
-<h1>Messages#new</h1>
-<p>Find me in app/views/messages/new.html.erb</p>
+<%= render 'form' %>
+<div class="panel panel-default" id="messages">
+  <div class="panel-body">
+    <ul class="media-list">
+      <%= render @messages %>
+    </ul>
+  </div>
+</div>

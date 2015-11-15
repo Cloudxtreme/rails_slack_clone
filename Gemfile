@@ -32,6 +32,10 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'jquery-turbolinks'
+gem 'faye-rails', '~> 2.0'
+gem 'thin'
+
 gem 'devise'
 gem 'bootstrap-sass', '~> 3.3.5'
 gem 'haml'

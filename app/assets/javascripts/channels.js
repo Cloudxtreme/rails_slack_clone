@@ -104,9 +104,9 @@ $(document).ready(function(){
     clearText();
   });
 
-  window.setInterval(function(){
-    refresh();
-  }, 3000);
+  // window.setInterval(function(){
+  //   refresh();
+  // }, 3000);
 
   scrollDown();
 });
